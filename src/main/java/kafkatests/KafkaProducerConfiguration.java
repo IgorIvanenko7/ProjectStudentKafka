@@ -3,6 +3,7 @@ package kafkatests;
 import java.util.HashMap;
 import java.util.Map;
 
+import kafkatests.dto.UserDto;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;

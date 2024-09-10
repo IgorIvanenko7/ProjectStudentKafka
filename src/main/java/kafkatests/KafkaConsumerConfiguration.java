@@ -2,7 +2,9 @@ package kafkatests;
 
 import java.util.Map;
 
+import kafkatests.dto.UserDto;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.common.protocol.types.Field;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

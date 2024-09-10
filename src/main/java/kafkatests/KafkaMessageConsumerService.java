@@ -1,24 +1,35 @@
 package kafkatests;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import kafkatests.dto.UserDto;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.support.KafkaHeaders;
-import org.springframework.messaging.handler.annotation.Header;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Log4j2
 @Service
+
 public class KafkaMessageConsumerService {
 
-	private static final Logger LOG = LoggerFactory.getLogger(KafkaMessageConsumerService.class);
+    @Autowired
+	public ObjectMapper objectMapper;
 
-	@SuppressWarnings({ "static-method", "unused" })
-	@KafkaListener(topics = "topic2")
-	public void onMessage(@Payload String msg,
-		@Header(KafkaHeaders.RECEIVED_TOPIC) String topic,
-		@Header(KafkaHeaders.RECEIVED_PARTITION_ID) Integer partition,
-		@Header(KafkaHeaders.OFFSET) Long offset) {
-		LOG.info("Message consumed {}", msg);
+
+	public static Map<String, List<String>> storeMess = new HashMap<>();
+
+	@KafkaListener(topics = "registration", groupId = "myGroup")
+	public void listener(String message) throws JsonProcessingException {
+
+		var userDto = objectMapper.readValue(message, UserDto.class);
+		var findList = storeMess.getOrDefault(userDto.getConferenceId(), new ArrayList<>());
+		findList.add(userDto.getName());
+		log.info("Received message: {} ", message);
 	}
 }

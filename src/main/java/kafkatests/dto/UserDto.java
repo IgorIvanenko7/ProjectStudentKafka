@@ -6,5 +6,5 @@ import lombok.Data;
 public class UserDto {
 
     private String name;
-    private Long conferenceId;
+    private String conferenceId;
 }
