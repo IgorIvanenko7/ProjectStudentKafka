@@ -10,16 +10,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class KafkaMessageProducerService {
 
-    private static final String TOPIC = "registration";
+    private static final String TOPIC = "registrationnew";
     
-	private final KafkaTemplate<String, JsonNode> kafkaTemplate;
+	private final KafkaTemplate<String, String> kafkaTemplate;
 
     @Autowired
-    public KafkaMessageProducerService(KafkaTemplate<String, JsonNode> kafkaTemplate) {
+    public KafkaMessageProducerService(KafkaTemplate<String, String> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void send(JsonNode jsonNode) {
-        kafkaTemplate.send(TOPIC, jsonNode);
+    public void send(String mess) {
+        kafkaTemplate.send(TOPIC, mess);
     }
 }

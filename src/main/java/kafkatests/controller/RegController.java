@@ -19,7 +19,6 @@ import java.util.List;
 public class RegController {
 
     private final HandlerService handlerService;
-    private final NewRegistersReceiver newRegistersReceiver;
 
     // Регистрация посетителя конф.
     @PutMapping("/register")
@@ -31,7 +30,7 @@ public class RegController {
 
     // Получить всех новых участников конференции
     @GetMapping("/getNewRegisters/{conferenceId}")
-    public List<JsonNode> getAllUsersConferenceMap (
+    public List<UserDto> getAllUsersConferenceMap (
             @PathVariable String conferenceId) {
         return handlerService.getListUsersV2(conferenceId);
     }
