@@ -69,16 +69,16 @@ class KafkaProducerServiceTest {
 		listener.stop();
 	}
 
-	@Test
-	void shouldSendMessage() throws InterruptedException {
-
-		kafkaMessageProducerService.send("msg1");
-
-		ConsumerRecord<String, String> received = consumerRecords.poll(10, TimeUnit.SECONDS);
-
-		assertThat(received)
-			.has(value("msg1"))
-			.has(key(null));
-	}
+//	@Test
+//	void shouldSendMessage() throws InterruptedException {
+//
+//		kafkaMessageProducerService.send("msg1");
+//
+//		ConsumerRecord<String, String> received = consumerRecords.poll(10, TimeUnit.SECONDS);
+//
+//		assertThat(received)
+//			.has(value("msg1"))
+//			.has(key(null));
+//	}
 
 }

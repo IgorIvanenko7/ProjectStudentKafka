@@ -1,6 +1,7 @@
 package kafkatests.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kafkatests.KafkaMessageConsumerService;
 import kafkatests.KafkaMessageProducerService;
@@ -20,11 +21,13 @@ public class HandlerService {
 
     private final KafkaMessageProducerService kafkaMessageProducerService;
     private final KafkaMessageConsumerService kafkaMessageConsumerService;
-    public final ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
+    private final ConvertData convertData;
 
     public static Map<String, List<String>> storeUser = new HashMap<>();
 
     public void regUsers (UserDto userDto) throws JsonProcessingException {
+        // Insert into
        var reqDto = Optional.ofNullable(userDto)
                .map(dto -> {
                   // Если нет указанной конференции создается новая
@@ -35,13 +38,18 @@ public class HandlerService {
                })
                .orElseThrow(() -> new HandlerExeptionLimit(
                         "Пустой объект"," отказ в регистрации"));
-        // Insert Topic
-       String jsonString = objectMapper.writeValueAsString(userDto);
-       kafkaMessageProducerService.send(userDto.toString());
+        // Insert into Topic
+
+        var jsonObj = objectMapper.valueToTree(userDto);
+       log.info(jsonObj);
+
+//       String jsonString = objectMapper.writeValueAsString(userDto);
+
+
+       kafkaMessageProducerService.send(jsonObj);
        log.info("Insert User: {} on Conference: {}",
                userDto.getName(), userDto.getConferenceId());
     }
-
 
     public List<String> getListUsers (String conferenceId) {
         return Optional.ofNullable(storeUser.get(conferenceId))
@@ -51,7 +59,7 @@ public class HandlerService {
 
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
-    public List<String> getListUsersV2 (String conferenceId) {
+    public List<JsonNode> getListUsersV2 (String conferenceId) {
 
         var listUser = Optional.ofNullable(KafkaMessageConsumerService.storeMess.get(conferenceId))
                 .orElse(Collections.emptyList());

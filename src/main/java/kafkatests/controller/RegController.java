@@ -2,6 +2,7 @@ package kafkatests.controller;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import kafkatests.dto.UserDto;
 import kafkatests.service.HandlerService;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,7 @@ public class RegController {
 
     // Получить всех новых участников конференции
     @GetMapping("/getNewRegisters/{conferenceId}")
-    public List<String> getAllUsersConferenceMap (
+    public List<JsonNode> getAllUsersConferenceMap (
             @PathVariable String conferenceId) {
         return handlerService.getListUsersV2(conferenceId);
     }
