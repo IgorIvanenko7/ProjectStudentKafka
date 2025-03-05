@@ -35,5 +35,4 @@ public class KafkaProducerConfigurationLimit {
             @Qualifier("kafkaConsumerFactory") ConsumerFactory<String, String> consumerFactory) {
         return KafkaConfigFactory.createKafkaListenerContainerFactory(consumerFactory);
     }
-
 }

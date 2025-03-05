@@ -1,5 +1,7 @@
 package kafkatests.service;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -14,10 +16,13 @@ import static kafkatests.config.KafkaProducerConfigurationLimit.LIMIT_PROCESS_CR
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class KafkaLimitProcessCreatedConsumerService {
 
+	private final ObjectMapper objectMapper;
+
 	@KafkaListener(
 		topics = LIMIT_PROCESS_CREATED_TOPIC,
 		containerFactory = "clientMappingKafkaListenerContainerFactory")
 	public void listenBase(ConsumerRecord<String, String> record) {
-		log.info("### Received record: {} ###", record);
+		var reqJson = objectMapper.convertValue(record.value(), JsonNode.class);
+		log.info("### Received value: {} ###", reqJson);
 	}
 }
