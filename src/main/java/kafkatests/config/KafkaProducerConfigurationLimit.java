@@ -24,7 +24,6 @@ public class KafkaProducerConfigurationLimit {
     public static final String LIMIT_PROCESS_CREATED_TOPIC
             = "ru.vtb.dc.pcm.integration.external.consume.state.CreditMemorandumInitialized";
 
-
     @Bean
     @Qualifier("kafkaConsumerFactory")
     public ConsumerFactory<String, String> clientMappingKafkaConsumerFactory() {

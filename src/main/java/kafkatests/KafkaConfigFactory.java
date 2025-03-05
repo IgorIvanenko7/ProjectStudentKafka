@@ -58,10 +58,8 @@ public class KafkaConfigFactory {
         var configProps = new HashMap<String, Object>();
         configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
                 ccmKafkaProperties.getSslKafka().get(ccmKafkaProperties.getSegment()).getBootstrapServers());
-        configProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
-        configProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
-        configProps.put(ErrorHandlingDeserializer.KEY_DESERIALIZER_CLASS, StringDeserializer.class);
-        configProps.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, StringSerializer.class);
+        configProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        configProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         configProps.put(ConsumerConfig.GROUP_ID_CONFIG, ccmKafkaProperties.getConsumer().getGroupId());
         configProps.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, ccmKafkaProperties.getConsumer().getAutoOffsetReset());
         configSslConnection(configProps, ccmKafkaProperties);

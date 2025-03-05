@@ -1,8 +1,6 @@
 package kafkatests.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kafkatests.KafkaMessageConsumerService;
-import kafkatests.KafkaMessageProducerService;
 import kafkatests.dto.UserDto;
 import kafkatests.handleExeption.HandlerExeptionLimit;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +15,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class HandlerService {
 
-    private final KafkaMessageProducerService kafkaMessageProducerService;
     private final ObjectMapper objectMapper;
-    private final ConvertData convertData;
 
     public static Map<String, List<String>> storeUser = new HashMap<>();
 
@@ -38,7 +34,6 @@ public class HandlerService {
         // Insert into Topic
        var jsonObj = objectMapper.valueToTree(userDto);
        log.info(jsonObj);
-       kafkaMessageProducerService.send(jsonObj.toString());
        log.info("Insert User: {} on Conference: {}",
                userDto.getName(), userDto.getConferenceId());
     }

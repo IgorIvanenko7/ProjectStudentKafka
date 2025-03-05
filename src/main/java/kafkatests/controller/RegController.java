@@ -34,10 +34,4 @@ public class RegController {
             @PathVariable String conferenceId) {
         return handlerService.getListUsersV2(conferenceId);
     }
-
-//    @GetMapping("/getNewRegisters/{conferenceId}")
-//    public List<String> getAllUsersConference (
-//            @PathVariable int conferenceId) {
-//        return newRegistersReceiver.getNewRegisters(conferenceId);
-//    }
 }
