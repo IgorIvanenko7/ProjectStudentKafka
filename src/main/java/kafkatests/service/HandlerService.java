@@ -53,9 +53,10 @@ public class HandlerService {
 //------------------------------------------------------------------------------
     public List<UserDto> getListUsersV2 (String conferenceId) {
 
-        var listUser = Optional.ofNullable(KafkaMessageConsumerService.storeMess.get(conferenceId))
-                .orElse(Collections.emptyList());
-        KafkaMessageConsumerService.storeMess.put(conferenceId, new ArrayList<>());
-        return listUser;
+//        var listUser = Optional.ofNullable(KafkaMessageConsumerService.storeMess.get(conferenceId))
+//                .orElse(Collections.emptyList());
+//        KafkaMessageConsumerService.storeMess.put(conferenceId, new ArrayList<>());
+        //return listUser;
+        return List.of( new UserDto());
     }
 }

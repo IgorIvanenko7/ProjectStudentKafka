@@ -16,10 +16,11 @@ import org.springframework.kafka.core.ConsumerFactory;
 @Setter
 @Getter
 @Configuration
-@RequiredArgsConstructor(onConstructor_ = @Autowired)
-public class KafkaProducerConfiguration {
+@RequiredArgsConstructor
+public class KafkaProducerConfigurationLimit {
 
     private final ConfigPropertiesAES configPropertiesAES;
+
     public static final String LIMIT_PROCESS_CREATED_TOPIC
             = "ru.vtb.dc.pcm.integration.external.consume.state.CreditMemorandumInitialized";
 

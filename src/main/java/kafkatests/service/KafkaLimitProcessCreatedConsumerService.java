@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
-import static kafkatests.config.KafkaProducerConfiguration.LIMIT_PROCESS_CREATED_TOPIC;
+import static kafkatests.config.KafkaProducerConfigurationLimit.LIMIT_PROCESS_CREATED_TOPIC;
 
 @Log4j2
 @Service
