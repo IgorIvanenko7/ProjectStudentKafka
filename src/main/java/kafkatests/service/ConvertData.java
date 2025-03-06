@@ -33,6 +33,7 @@ public class ConvertData {
             throw new RuntimeException(e);
         }
     }
+
     //-------------------------------------------------------------------------------------------------
     public  <T>  T getObjectFromFile(Class<T> respClass, String path){
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(path)) {

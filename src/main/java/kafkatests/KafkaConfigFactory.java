@@ -11,6 +11,7 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.*;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
+import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import java.util.HashMap;
@@ -62,6 +63,7 @@ public class KafkaConfigFactory {
         configProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         configProps.put(ConsumerConfig.GROUP_ID_CONFIG, ccmKafkaProperties.getConsumer().getGroupId());
         configProps.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, ccmKafkaProperties.getConsumer().getAutoOffsetReset());
+        configProps.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
         configSslConnection(configProps, ccmKafkaProperties);
         return new DefaultKafkaConsumerFactory<>(configProps);
     }
